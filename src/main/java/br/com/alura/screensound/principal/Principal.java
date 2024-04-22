@@ -1,5 +1,7 @@
 package br.com.alura.screensound.principal;
 
+import br.com.alura.screensound.model.Artista;
+import br.com.alura.screensound.model.TipoArtista;
 import br.com.alura.screensound.repository.ArtistaRepository;
 
 import java.util.Scanner;
@@ -21,7 +23,8 @@ public class Principal {
             var menu = """
                     *** Screen Sound Músicas ***                    
                                         
-                    1- Cadastrar artistas                
+                    1- Cadastrar artistas
+                    2- Cadastrar músicas                
                     9 - Sair
                     """;
 
@@ -43,5 +46,18 @@ public class Principal {
     }
 
     private void cadastrarArtistas() {
+        var cadastrarNovo = "S";
+
+        while (cadastrarNovo.equalsIgnoreCase("s")) {
+            System.out.println("Informe o nome desse artista: ");
+            var nome = leitura.nextLine();
+            System.out.println("Informe o tipo desse artista: (solo, dupla ou banda)");
+            var tipo = leitura.nextLine();
+            TipoArtista tipoArtista = TipoArtista.valueOf(tipo.toUpperCase());
+            Artista artista = new Artista(nome, tipoArtista);
+            repositorio.save(artista);
+            System.out.println("Cadastrar novo artista? (S/N)");
+            cadastrarNovo = leitura.nextLine();
+        }
     }
 }
