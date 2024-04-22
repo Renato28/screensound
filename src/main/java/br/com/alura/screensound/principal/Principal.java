@@ -28,7 +28,8 @@ public class Principal {
                                         
                     1- Cadastrar artistas
                     2- Cadastrar músicas 
-                    3- Listar músicas               
+                    3- Listar músicas
+                    4- Buscar músicas por artistas               
                     9 - Sair
                     """;
 
@@ -46,6 +47,9 @@ public class Principal {
                 case 3:
                     listarMusicas();
                     break;
+                case 4:
+                    buscarMusicasPorArtista();
+                    break;
                 case 9:
                     System.out.println("Encerrando a aplicação!");
                     break;
@@ -53,6 +57,13 @@ public class Principal {
                     System.out.println("Opção inválida!");
             }
         }
+    }
+
+    private void buscarMusicasPorArtista() {
+        System.out.println("Buscar músicas de que artista? ");
+        var nome = leitura.nextLine();
+        List<Musica> musicas = repositorio.buscaMusicasPorArtista(nome);
+        musicas.forEach(System.out::println);
     }
 
     private void listarMusicas() {
