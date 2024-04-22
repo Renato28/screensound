@@ -5,6 +5,7 @@ import br.com.alura.screensound.model.Musica;
 import br.com.alura.screensound.model.TipoArtista;
 import br.com.alura.screensound.repository.ArtistaRepository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -26,7 +27,8 @@ public class Principal {
                     *** Screen Sound Músicas ***                    
                                         
                     1- Cadastrar artistas
-                    2- Cadastrar músicas                
+                    2- Cadastrar músicas 
+                    3- Listar músicas               
                     9 - Sair
                     """;
 
@@ -41,6 +43,9 @@ public class Principal {
                 case 2:
                     cadastrarMusicas();
                     break;
+                case 3:
+                    listarMusicas();
+                    break;
                 case 9:
                     System.out.println("Encerrando a aplicação!");
                     break;
@@ -48,6 +53,11 @@ public class Principal {
                     System.out.println("Opção inválida!");
             }
         }
+    }
+
+    private void listarMusicas() {
+        List<Artista> artistas = repositorio.findAll();
+        artistas.forEach(a -> a.getMusicas().forEach(System.out::println));
     }
 
     private void cadastrarMusicas() {
