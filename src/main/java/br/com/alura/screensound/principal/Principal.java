@@ -4,6 +4,7 @@ import br.com.alura.screensound.model.Artista;
 import br.com.alura.screensound.model.Musica;
 import br.com.alura.screensound.model.TipoArtista;
 import br.com.alura.screensound.repository.ArtistaRepository;
+import br.com.alura.screensound.service.ConsultaChatGPT;
 
 import java.util.List;
 import java.util.Optional;
@@ -29,7 +30,8 @@ public class Principal {
                     1- Cadastrar artistas
                     2- Cadastrar músicas 
                     3- Listar músicas
-                    4- Buscar músicas por artistas               
+                    4- Buscar músicas por artistas
+                    5- Pesquisar dados sobre um artista               
                     9 - Sair
                     """;
 
@@ -50,6 +52,9 @@ public class Principal {
                 case 4:
                     buscarMusicasPorArtista();
                     break;
+                case 5:
+                    pesquisarDadosDoArtista();
+                    break;
                 case 9:
                     System.out.println("Encerrando a aplicação!");
                     break;
@@ -58,6 +63,14 @@ public class Principal {
             }
         }
     }
+
+    private void pesquisarDadosDoArtista() {
+        System.out.println("Pesquisar dados sobre qual artista? ");
+        var nome = leitura.nextLine();
+        var resposta = ConsultaChatGPT.obterInformacao(nome);
+        System.out.println(resposta.trim());
+    }
+
 
     private void buscarMusicasPorArtista() {
         System.out.println("Buscar músicas de que artista? ");
